@@ -1,8 +1,9 @@
-# README
+# Calorie Checker
 
-By using this app, you can see how much calorie you should take everyday and get recommendation of your next meal.
+Calorie Checker enables you to know how much calorie you should take in a day and  
+get recommendation of your next meal.
 
-Ruby version : 2.3.1
+Ruby version : 2.3.1  
 Rails : 5.1.4
 
 ## How to start this app
