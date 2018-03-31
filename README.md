@@ -1,24 +1,34 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+By using this app, you can see how much calorie you should take everyday and get recommendation of your next meal.
 
-Things you may want to cover:
+Ruby version : 2.3.1
+Rails : 5.1.4
 
-* Ruby version
+## How to start this app
 
-* System dependencies
+1. Clone repository
 
-* Configuration
+2. Install Gems
 
-* Database creation
+```
+$ bundle install --without production
+```
 
-* Database initialization
+3. Migrate Database
 
-* How to run the test suite
+```
+$ rails db:migrate
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+3. Run test
 
-* Deployment instructions
+```
+$ rails test
+```
 
-* ...
+4. Start server
+
+```
+$ rails server
+```
