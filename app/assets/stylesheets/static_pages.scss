@@ -1,0 +1,70 @@
+
+.jumbotron {
+  background:url(home.jpg);
+  background-size: cover;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 0;
+  h1 {
+    padding: 30px;
+    color: white;
+    text-align: left;
+  }
+  p {
+    padding-left: 50px;
+    color: white;
+    text-align: left;
+  }
+}
+
+@mixin image($image) {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background-repeat: repeat;
+  background-image: url($image);
+  display: block;
+}
+
+.help {
+  .backgroundImage {
+    @include image('help.jpg');
+  }
+}
+
+.contact {
+  .backgroundImage {
+    @include image('contact.jpg');
+  }
+}
+
+.about {
+  .backgroundImage {
+    @include image('about.jpg');
+  }
+}
+
+.wrapper {
+  position: absolute;
+  width: 80vw;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  margin: 0 auto;
+}
+
+.main {
+  h1 {
+    padding-top: 60px;
+  }
+  p {
+    font-size: 30px;
+  }
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+}
