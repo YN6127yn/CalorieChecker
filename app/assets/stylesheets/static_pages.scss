@@ -16,6 +16,10 @@
     color: white;
     text-align: left;
   }
+  .button_wrapper {
+    margin: 150px auto;
+    text-align: center;
+  }
 }
 
 @mixin image($image) {
