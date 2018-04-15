@@ -5,9 +5,12 @@ class User < ApplicationRecord
 
   # Validations
   validates :name, presence: true, length: {maximum:50}
-  validates :password, presence:true, length: {minimum:6}, allow_nil:true
-  validates :height, presence:true, numericality: { less_than: 2.5 }
-  validates :weight, presence:true, numericality: { less_than: 500 }
+  #validates :password, presence:true, length: {minimum:6}, allow_nil:true
+  validates :height, presence:true, numericality: {greater_than: 0.0,
+                                                   less_than_or_equal_to: 3.0 }
+  validates :weight, presence:true, numericality: {only_integer: true,
+                                                   greater_than: 0,
+                                                   less_than_or_equal_to: 1000 }
   validates :day_of_birth, presence:true
   validate :day_of_birth_cannot_be_in_the_future
   validates :strength, presence:true,

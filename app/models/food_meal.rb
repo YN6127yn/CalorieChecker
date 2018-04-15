@@ -5,6 +5,6 @@ class FoodMeal < ApplicationRecord
   belongs_to :meal
 
   # Validations
-  validates: food_id, presence: true
-  validates: meal_id, presence: true
+  validates :food_id, presence: true
+  validates :meal_id, presence: true
 end

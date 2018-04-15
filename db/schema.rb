@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20180403154740) do
     t.string "password_digest"
     t.date "day_of_birth"
     t.float "height"
-    t.float "weight"
+    t.integer "weight"
     t.integer "strength"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
