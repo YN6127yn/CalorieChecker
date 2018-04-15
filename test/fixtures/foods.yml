@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+rice:
   name: Rice
   calorie: 200
   group: staple_food
 
-two:
+bread:
   name: Bread
   calorie: 250
   group: staple_food

@@ -49,6 +49,11 @@ class UserTest < ActiveSupport::TestCase
     assert @user.valid?
   end
 
+  test "weight should be integer" do
+    @user.weight = 100.5
+    assert_not @user.valid?
+  end
+
   test "day of birth should be past or today" do
     @user.day_of_birth = Date.today + 1
     assert_not @user.valid?
@@ -61,6 +66,11 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  test "strength should be integer" do
+    @user.strength = 1.5
+    assert_not @user.valid?
+  end
+
   test "sex should be present" do
     @user.sex = nil
     assert_not @user.valid?
@@ -69,5 +79,13 @@ class UserTest < ActiveSupport::TestCase
   test "sex should be male or female" do
     @user.sex = "superman"
     assert_not @user.valid?
+  end
+
+  test "associated meal should be destroyed" do
+    @user.save
+    @user.meals.create(day: Date.today, meal_type: "lunch")
+    assert_difference 'Meal.count', -1 do
+      @user.destroy
+    end
   end
 end

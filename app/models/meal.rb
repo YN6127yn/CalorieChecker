@@ -14,12 +14,18 @@ class Meal < ApplicationRecord
   validate :day_cannot_be_in_the_future
   validates :meal_type, presence: true, inclusion: {in: %w(breakfast lunch dinner)}
 
+  # Get total calorie of the meal
   def total_calorie
     sum = 0
-    for food in foods
-      sum += food.calorie
+    food_meals.each do |food_meal|
+      sum += food_meal.food.calorie
     end
     return sum
+  end
+
+  # Add food to the meal
+  def add_food(food)
+    food_meals.create(food_id: food.id)
   end
 
   private
