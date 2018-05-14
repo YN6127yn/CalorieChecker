@@ -4,7 +4,8 @@ class UserTest < ActiveSupport::TestCase
 
   def setup
     @user = User.new(name: "User1", height: 1.7, weight: 60,
-                     day_of_birth: Date.today, strength: 2, sex: "male")
+                     date_of_birth: Date.today, strength: 2, sex: "male",
+                     password: "password", password_confirmation: "password")
   end
 
   test "should be valid" do
@@ -22,9 +23,9 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "height should not be too short" do
-    @user.height = 0.0
+    @user.height = 0.50
     assert_not @user.valid?
-    @user.height = 0.1
+    @user.height = 0.51
     assert @user.valid?
   end
 
@@ -36,9 +37,9 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "weight should not be too light" do
-    @user.weight = 0
+    @user.weight = 10
     assert_not @user.valid?
-    @user.weight = 1
+    @user.weight = 11
     assert @user.valid?
   end
 
@@ -54,8 +55,8 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
-  test "day of birth should be past or today" do
-    @user.day_of_birth = Date.today + 1
+  test "date of birth should be past or today" do
+    @user.date_of_birth = Date.today + 1
     assert_not @user.valid?
   end
 
@@ -81,9 +82,19 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  test "password should be present" do
+    @user.password = @user.password_confirmation = " " * 8
+    assert_not @user.valid?
+  end
+
+  test "password should have a minimum length" do
+    @user.password = @user.password_confirmation = "a" * 6
+    assert_not @user.valid?
+  end
+
   test "associated meal should be destroyed" do
     @user.save
-    @user.meals.create(day: Date.today, meal_type: "lunch")
+    @user.meals.create(date: Date.today, meal_type: "lunch")
     assert_difference 'Meal.count', -1 do
       @user.destroy
     end

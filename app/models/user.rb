@@ -4,20 +4,22 @@ class User < ApplicationRecord
   has_many :meals, dependent: :destroy
 
   # Validations
-  validates :name, presence: true, length: {maximum:50}
-  #validates :password, presence:true, length: {minimum:6}, allow_nil:true
-  validates :height, presence:true, numericality: {greater_than: 0.0,
-                                                   less_than_or_equal_to: 3.0 }
+  validates :name, presence: true, length: {maximum:50}, uniqueness: true
+  validates :height, presence:true, numericality: {greater_than: 0.50,
+                                                   less_than_or_equal_to: 3.00 }
   validates :weight, presence:true, numericality: {only_integer: true,
-                                                   greater_than: 0,
+                                                   greater_than: 10,
                                                    less_than_or_equal_to: 1000 }
-  validates :day_of_birth, presence:true
-  validate :day_of_birth_cannot_be_in_the_future
+  validates :date_of_birth, presence:true
+  validate :date_of_birth_cannot_be_in_the_future
   validates :strength, presence:true,
              numericality: {only_integer: true,
                             greater_than_or_equal_to: 1,
                             less_than_or_equal_to: 3}
   validates :sex, presence:true, inclusion: {in: %w(male female)}
+  has_secure_password
+  # add allow nil cause has_secure_password can detect nil
+  validates :password, presence:true, length: {minimum:8}, allow_nil:true
 
   # Return body math index(BMI)
   def body_math_index
@@ -63,23 +65,23 @@ class User < ApplicationRecord
     Meal.where(user_id: id)
   end
 
-  def meal_of(day, meal_type)
-    Meal.where(user_id: id).where(day: day).where(meal_type: meal_type)
+  def meal_of(date, meal_type)
+    Meal.where(user_id: id).where(date: date).where(meal_type: meal_type)
   end
 
   private
 
-    # Check whether day of birth is in the future
-    def day_of_birth_cannot_be_in_the_future
-      if day_of_birth > Date.today
-        errors.add(:day_of_birth, "You cannot be born in the future...")
+    # Check whether date of birth is in the future
+    def date_of_birth_cannot_be_in_the_future
+      if date_of_birth > Date.today
+        errors.add(:date_of_birth, "You cannot be born in the future...")
       end
     end
 
     # Return current age
     def current_age
       date_format = "%Y%m%d"
-      (Date.today.strftime(date_format).to_i - day_of_birth.strftime(date_format).to_i) / 10000
+      (Date.today.strftime(date_format).to_i - date_of_birth.strftime(date_format).to_i) / 10000
     end
 
     # Return male BMR

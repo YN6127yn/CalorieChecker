@@ -3,7 +3,7 @@ require 'test_helper'
 class MealTest < ActiveSupport::TestCase
 
   def setup
-    @meal = Meal.new(user_id: users(:stick).id, day: Date.today, meal_type: "lunch")
+    @meal = Meal.new(user_id: users(:stick).id, date: Date.today, meal_type: "lunch")
   end
 
   test "should be valid" do
@@ -15,8 +15,8 @@ class MealTest < ActiveSupport::TestCase
     assert_not @meal.valid?
   end
 
-  test "day of birth should be past or today" do
-    @meal.day = Date.today + 1
+  test "date should be past or today" do
+    @meal.date = Date.today + 1
     assert_not @meal.valid?
   end
 

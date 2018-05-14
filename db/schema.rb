@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403154740) do
+ActiveRecord::Schema.define(version: 20180430121457) do
 
   create_table "food_meals", force: :cascade do |t|
     t.integer "food_id"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20180403154740) do
   end
 
   create_table "meals", force: :cascade do |t|
-    t.date "day"
+    t.date "date"
     t.string "meal_type"
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -43,13 +43,14 @@ ActiveRecord::Schema.define(version: 20180403154740) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
-    t.date "day_of_birth"
+    t.date "date_of_birth"
     t.float "height"
     t.integer "weight"
     t.integer "strength"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "sex"
+    t.index ["name"], name: "index_users_on_name", unique: true
   end
 
 end

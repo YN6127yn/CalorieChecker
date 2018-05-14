@@ -6,12 +6,12 @@ class Meal < ApplicationRecord
   has_many :food_meals, foreign_key: "meal_id", dependent: :destroy
 
   # Scope
-  default_scope -> {order(day: :desc)}
+  default_scope -> {order(date: :desc)}
 
   # Validates
   validates :user_id, presence: true
-  validates :day, presence: true
-  validate :day_cannot_be_in_the_future
+  validates :date, presence: true
+  validate :date_cannot_be_in_the_future
   validates :meal_type, presence: true, inclusion: {in: %w(breakfast lunch dinner)}
 
   # Get total calorie of the meal
@@ -30,10 +30,10 @@ class Meal < ApplicationRecord
 
   private
 
-    # Check whether day is in the future
-    def day_cannot_be_in_the_future
-      if day > Date.today
-        errors.add(:day, "You can't have meal in the future now...")
+    # Check whether date is in the future
+    def date_cannot_be_in_the_future
+      if date > Date.today
+        errors.add(:date, "You can't have meal in the future now...")
       end
     end
 end

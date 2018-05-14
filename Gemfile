@@ -33,6 +33,8 @@ group :development, :test do
   gem 'selenium-webdriver'
   # Use sqlite3 as the database for Active Record in development and test environment
   gem 'sqlite3', '1.3.13'
+  # Use bcrypt to hash password
+  gem  'bcrypt', '3.1.11'
 end
 
 group :development do
